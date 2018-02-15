@@ -3,17 +3,36 @@ goto :debut
 14/02/2018  09:54                20 randomfolder.cmd
 crée la liste des dossiers terminaux contenant un type de fichier donnés fourni en paramètre
 puis sélectionne l'un d'entre eux au hasard pour le copier vers la destination fournie en paramètre
-à faire : crée une liste des dossiers déjà copiés afin de ne pas la piocher à nouveau
-à faire : purge la liste d'éviction lorsque la liste de dossiers valides ne contient plus qu'un seul item
-à faire : accepter un paramètre en ligne de commande afin de déterminer s'il faut régénérer le liste des dossiers ou s'il faut prendre celle qui est éventuellement existante
-
+- crée une liste des dossiers déjà copiés afin de ne pas la piocher à nouveau
+- purge la liste d'éviction lorsque la liste de dossiers valides ne contient plus qu'un seul item
+- vérifie que la destination est valide
+- accepter un paramètre en ligne de commande afin de déterminer s'il faut régénérer le liste des dossiers ou s'il faut prendre celle qui est éventuellement existante
+- page d'aide
+- discrimination des paramètres sans ordre préférentiel sur la ligne de commande
+- page d'aide
+- gestion des erreurs dans les paramètres fournis
 
 PREREQUIS : Utilitaires Linux recompilés pour windows
-SED
-WC
-SORT (ici renommé en usort pour éviter la confusion)
-AWK (ici dans sa version GAWK)
+- SED
+- WC
+- SORT (ici renommé en usort pour éviter la confusion)
+- GAWK (Gnu AWK)
+- CAT
 
+USAGE :
+  Invocation depuis la ligne de commande sous la forme
+  %0 [type] [destination] [[/G]]
+  avec type : extension de fichier recherchée, sur 3 caractères, ? acceptés et * transformés en ?
+       destination : chemin de fichier de destination, devant exister et ne se terminant pas par \
+       /G paramètre facultatif pour forcer la régénération de la liste des dossiers gérés
+       (à utiliser en cas d'ajout, suppression, renommage de répertoire contenant les fichiers du type monitoré)
+   type et destination sont obligatoires, /G est facultatif
+   l'ordre des paramètres est indifférent
+
+HISTORIQUE
+14/02/2018 - 09:54 Création
+14/02/2018 - 19:02:46 Première version opérationnelle
+15/02/2018 - 11:35:29 Bautification et publication dans le repository https://github.com/537719/bidouille.git
 :debut
 :analysecmdline
 set REGENERE=NON
